@@ -1,1 +1,294 @@
+= ECOSYSTEM.scm
+:author: Jonathan D.A. Jewell
+:revdate: 2025-12-15
+:toc:
+:toclevels: 3
+:sectnums:
+:icons: font
+:source-highlighter: rouge
 
+== Overview
+
+**ECOSYSTEM.scm** is a declarative S-expression format for describing software project ecosystems and inter-project relationships.
+
+[source,scheme]
+----
+(ecosystem
+  (version "1.0.0")
+  (name "my-project")
+  (type "library")
+  (purpose "Platform-agnostic AI routing decisions")
+
+  (position-in-ecosystem
+    "This is the LIBRARY layer - provides routing intelligence.
+     Applications consume this library for decision-making.")
+
+  (related-projects
+    (project
+      (name "other-project")
+      (url "https://github.com/org/other-project")
+      (relationship "consumer")
+      (description "Uses this library for routing")))
+
+  (what-this-is
+    "A Rust library that decides WHERE to run AI inference")
+
+  (what-this-is-not
+    "- NOT an application (just a library)
+     - NOT an inference engine (bring your own)"))
+----
+
+== Why ECOSYSTEM.scm?
+
+Modern software exists within ecosystems of interrelated projects. Yet no standard format exists to formally declare:
+
+* **What a project is** - and equally important, what it is _not_
+* **Where it fits** - its position in the broader ecosystem
+* **How it relates** - typed relationships to other projects
+* **Where it's going** - future integration intentions
+
+ECOSYSTEM.scm fills this gap with a human-readable, version-control friendly, machine-parseable format.
+
+=== Use Cases
+
+* **Automated dependency mapping** - Understand project relationships at scale
+* **Documentation generation** - Create ecosystem visualisations
+* **Project disambiguation** - Clarify boundaries between similar projects
+* **Integration planning** - Assess compatibility before adoption
+* **Onboarding** - Help new contributors understand project context
+
+== Quick Start
+
+=== 1. Create an ECOSYSTEM.scm file
+
+Place in your repository root:
+
+[source,scheme]
+----
+;; SPDX-License-Identifier: MIT
+;; ECOSYSTEM.scm - Project ecosystem context
+
+(ecosystem
+  (version "1.0.0")
+  (name "your-project-name")
+  (type "library")  ; or: application, service, specification, framework, tool
+  (purpose "One sentence describing what this does")
+
+  (what-this-is
+    "Detailed explanation of capabilities")
+
+  (what-this-is-not
+    "Explicit boundaries and non-goals"))
+----
+
+=== 2. Add Related Projects
+
+[source,scheme]
+----
+(related-projects
+  (project
+    (name "upstream-lib")
+    (url "https://github.com/org/upstream-lib")
+    (relationship "producer")
+    (description "We depend on this library"))
+
+  (project
+    (name "competing-tool")
+    (relationship "alternative")
+    (differentiation
+      "We focus on X; they focus on Y")))
+----
+
+=== 3. Validate (Optional)
+
+Convert to JSON and validate against the schema:
+
+[source,bash]
+----
+# Using a hypothetical scm-to-json tool
+scm-to-json ECOSYSTEM.scm | jsonschema -i - spec/ecosystem.schema.json
+----
+
+== Specification
+
+=== Format
+
+* **Syntax:** S-expression (symbolic expression)
+* **Encoding:** UTF-8
+* **Media Type:** `application/vnd.ecosystem+scm`
+* **File Extension:** `.ecosystem.scm` or `ECOSYSTEM.scm`
+
+=== Required Fields
+
+[cols="2,4"]
+|===
+| Field | Description
+
+| `version`
+| Semantic version of document content
+
+| `name`
+| Canonical project name
+
+| `type`
+| Project category (library, application, service, etc.)
+
+| `purpose`
+| Concise description (1-3 sentences)
+|===
+
+=== Optional Fields
+
+[cols="2,4"]
+|===
+| Field | Description
+
+| `position-in-ecosystem`
+| Where this project fits in the broader ecosystem
+
+| `related-projects`
+| List of related projects with typed relationships
+
+| `what-this-is`
+| Detailed explanation of capabilities
+
+| `what-this-is-not`
+| Explicit boundaries and non-goals
+
+| `future-integration`
+| Planned integrations and roadmap
+
+| `specification`
+| Technical metadata (for spec documents)
+|===
+
+=== Relationship Types
+
+[cols="2,4"]
+|===
+| Type | Meaning
+
+| `consumer`
+| Related project uses this project
+
+| `producer`
+| This project uses related project
+
+| `sibling`
+| Same organisation or ecosystem
+
+| `sibling-standard`
+| Related specification
+
+| `complementary`
+| Works alongside this project
+
+| `alternative`
+| Competing or alternative solution
+
+| `inspiration`
+| Design influence
+
+| `fork` / `upstream` / `downstream`
+| Code lineage relationships
+
+| `potential-consumer`
+| May use in future
+
+| `deprecated-by` / `deprecates`
+| Succession relationships
+|===
+
+== Standards Track
+
+ECOSYSTEM.scm is pursuing formal standardisation through the **IETF Informational RFC** track.
+
+=== Current Status
+
+[cols="2,3,1"]
+|===
+| Deliverable | Location | Status
+
+| Canonical specification
+| `ECOSYSTEM.scm`
+| ✓ Complete
+
+| ABNF grammar
+| `spec/ecosystem.abnf`
+| ✓ Complete
+
+| JSON Schema
+| `spec/ecosystem.schema.json`
+| ✓ Complete
+
+| Internet-Draft
+| `spec/draft/draft-jewell-ecosystem-scm-00.txt`
+| ✓ Complete
+
+| IANA considerations
+| `spec/IANA-CONSIDERATIONS.adoc`
+| ✓ Complete
+
+| Standards roadmap
+| `STANDARDS-ROADMAP.adoc`
+| ✓ Complete
+|===
+
+=== Why IETF?
+
+* Strong precedent for data formats (GeoJSON RFC 7946, iCalendar RFC 5545)
+* Accessible, well-understood process
+* Free and volunteer-driven
+* Leads to IANA media type registration
+
+See link:STANDARDS-ROADMAP.adoc[STANDARDS-ROADMAP.adoc] for the complete standardisation plan.
+
+== Project Structure
+
+[source]
+----
+ECOSYSTEM.scm/
+├── ECOSYSTEM.scm              # Canonical specification (self-describing)
+├── README.adoc                # This file
+├── STANDARDS-ROADMAP.adoc     # Standardisation plan
+├── spec/
+│   ├── ecosystem.abnf         # Formal ABNF grammar (RFC 5234)
+│   ├── ecosystem.schema.json  # JSON Schema for validation
+│   ├── IANA-CONSIDERATIONS.adoc
+│   └── draft/
+│       └── draft-jewell-ecosystem-scm-00.txt  # IETF I-D
+├── CONTRIBUTING.md
+├── CODE_OF_CONDUCT.md
+├── SECURITY.md
+└── LICENSE                    # MIT
+----
+
+== Related Projects
+
+=== STATE.scm
+
+Sibling format for AI conversation state persistence.
+
+* Repository: https://github.com/hyperpolymath/state.scm
+* Relationship: `sibling-standard`
+* Differentiation: STATE.scm handles session state; ECOSYSTEM.scm handles project context
+
+== Contributing
+
+See link:CONTRIBUTING.md[CONTRIBUTING.md] for guidelines.
+
+=== Priority Contributions
+
+1. **Reference implementations** - Parsers in Rust, TypeScript, Python
+2. **Tooling** - Validators, linters, converters
+3. **Editor support** - Syntax highlighting, snippets
+4. **Feedback** - Use the format and report issues
+
+== Licence
+
+MIT License - see link:LICENSE[LICENSE]
+
+== Contact
+
+* Issues: https://github.com/hyperpolymath/ECOSYSTEM.scm/issues
+* Discussions: https://github.com/hyperpolymath/ECOSYSTEM.scm/discussions
