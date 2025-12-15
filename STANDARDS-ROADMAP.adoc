@@ -1,0 +1,398 @@
+= ECOSYSTEM.scm Standards Track Roadmap
+:author: Jonathan D.A. Jewell
+:revdate: 2025-12-15
+:toc:
+:toclevels: 3
+:sectnums:
+:icons: font
+
+== Executive Summary
+
+ECOSYSTEM.scm is a declarative S-expression format for describing software project ecosystems and inter-project relationships. This document outlines the path to formal standardisation.
+
+**Recommended Standards Track:** IETF Informational RFC
+
+**Rationale:** Data interchange formats have strong precedent at IETF (RFC 7946 GeoJSON, RFC 5545 iCalendar, RFC 8259 JSON). The IETF process is well-understood, accessible, and appropriate for developer tooling formats.
+
+== Standards Bodies Evaluation
+
+=== IETF (Recommended)
+
+[cols="1,4"]
+|===
+| Aspect | Assessment
+
+| *Fit*
+| ✓ Excellent. Data format specifications are core IETF territory.
+
+| *Precedent*
+| RFC 7946 (GeoJSON), RFC 5545 (iCalendar), RFC 8259 (JSON), RFC 7763 (Markdown)
+
+| *Process*
+| Internet-Draft → IETF Last Call → RFC publication
+
+| *Timeline*
+| 6-18 months for Informational RFC
+
+| *Cost*
+| Free (volunteer-driven)
+
+| *Requirements*
+| Rough consensus, running code, community review
+|===
+
+*Track Options:*
+
+1. **Informational RFC** (Recommended initially)
+   - Documents existing practice
+   - No mandatory implementation requirements
+   - Appropriate for new formats seeking adoption
+
+2. **Standards Track RFC** (Future)
+   - Requires demonstrated interoperability
+   - Multiple independent implementations
+   - Appropriate after adoption grows
+
+=== IRTF (Not Recommended)
+
+[cols="1,4"]
+|===
+| Aspect | Assessment
+
+| *Fit*
+| ✗ Poor. IRTF is for research, not operational specifications.
+
+| *Purpose*
+| Long-term research groups, experimental protocols
+
+| *Verdict*
+| ECOSYSTEM.scm is practical tooling, not research.
+|===
+
+=== ISO (Not Recommended)
+
+[cols="1,4"]
+|===
+| Aspect | Assessment
+
+| *Fit*
+| ✗ Poor. ISO focuses on industrial/manufacturing standards.
+
+| *Timeline*
+| 3-5 years minimum
+
+| *Cost*
+| Significant (national body fees, committee participation)
+
+| *Process*
+| Requires national body sponsorship
+
+| *Verdict*
+| Overkill for software developer tooling formats.
+|===
+
+=== W3C (Not Recommended)
+
+[cols="1,4"]
+|===
+| Aspect | Assessment
+
+| *Fit*
+| ○ Partial. W3C focuses on web standards.
+
+| *Scope*
+| Browser technologies, semantic web, accessibility
+
+| *Process*
+| Working Group → Candidate Recommendation → Recommendation
+
+| *Verdict*
+| ECOSYSTEM.scm is not web-specific; IETF is better fit.
+|===
+
+=== ECMA (Not Recommended)
+
+[cols="1,4"]
+|===
+| Aspect | Assessment
+
+| *Fit*
+| ○ Partial. ECMA standardises programming languages.
+
+| *Precedent*
+| ECMAScript, JSON (ECMA-404), C#
+
+| *Process*
+| Technical Committee sponsorship required
+
+| *Verdict*
+| JSON went ECMA path, but IETF is more accessible.
+|===
+
+=== OASIS (Alternative)
+
+[cols="1,4"]
+|===
+| Aspect | Assessment
+
+| *Fit*
+| ○ Acceptable. OASIS handles structured information standards.
+
+| *Precedent*
+| AMQP, MQTT, DocBook, OpenDocument
+
+| *Process*
+| Technical Committee → Committee Specification → Standard
+
+| *Verdict*
+| Viable alternative if IETF process stalls.
+|===
+
+== Roadmap Phases
+
+=== Phase 1: Foundation (Current)
+
+**Status:** ✓ Complete
+
+[cols="3,1,3"]
+|===
+| Deliverable | Status | Location
+
+| Canonical specification file
+| ✓ Done
+| `ECOSYSTEM.scm`
+
+| ABNF grammar (RFC 5234)
+| ✓ Done
+| `spec/ecosystem.abnf`
+
+| JSON Schema
+| ✓ Done
+| `spec/ecosystem.schema.json`
+
+| Internet-Draft
+| ✓ Done
+| `spec/draft/draft-jewell-ecosystem-scm-00.txt`
+
+| IANA considerations
+| ✓ Done
+| `spec/IANA-CONSIDERATIONS.adoc`
+|===
+
+=== Phase 2: Community Review
+
+**Timeline:** 1-3 months
+
+**Objectives:**
+
+* [ ] Publish draft specification for community feedback
+* [ ] Gather implementation experience
+* [ ] Refine grammar based on real-world usage
+* [ ] Build reference parser/validator
+
+**Actions:**
+
+1. Announce on relevant forums/mailing lists
+2. Create GitHub Discussions for feedback
+3. Track issues and incorporate improvements
+4. Document implementation notes
+
+=== Phase 3: Implementation
+
+**Timeline:** 3-6 months
+
+**Objectives:**
+
+* [ ] Reference implementation (Rust recommended)
+* [ ] Parser libraries for major languages
+* [ ] Validation tools
+* [ ] Editor/IDE support
+
+**Minimum Implementations for Standards Track:**
+
+[cols="2,2,2"]
+|===
+| Language | Priority | Notes
+
+| Rust
+| High
+| Reference implementation
+
+| TypeScript/JavaScript
+| High
+| Web tooling, Node.js
+
+| Python
+| Medium
+| Broad ecosystem
+
+| Go
+| Medium
+| Cloud tooling
+
+| Scheme/Racket
+| Medium
+| Native S-expression support
+|===
+
+=== Phase 4: IETF Submission
+
+**Timeline:** Month 6-9
+
+**Actions:**
+
+1. Create IETF Datatracker account
+2. Submit Internet-Draft via https://datatracker.ietf.org/submit/
+3. Request review from ART (Applications and Real-Time) Area
+4. Respond to reviewer feedback
+5. Iterate on draft versions (-01, -02, etc.)
+
+**Draft Naming Convention:**
+
+* Individual submission: `draft-jewell-ecosystem-scm-XX`
+* If adopted by WG: `draft-ietf-<wg>-ecosystem-scm-XX`
+
+=== Phase 5: IANA Registration
+
+**Timeline:** Upon I-D acceptance
+
+**Actions:**
+
+1. Expert review of media type registration
+2. Submit registration via https://www.iana.org/form/media-types
+3. Await IANA processing
+4. Verify registration in media types registry
+
+=== Phase 6: RFC Publication
+
+**Timeline:** Month 12-18
+
+**Milestones:**
+
+1. IETF Last Call (2 weeks)
+2. IESG Review
+3. RFC Editor processing
+4. Publication as RFC XXXX
+
+== Success Criteria
+
+=== For Informational RFC
+
+* [ ] Clear, complete specification
+* [ ] At least one working implementation
+* [ ] No technical objections during Last Call
+* [ ] IANA registration approved
+
+=== For Future Standards Track
+
+* [ ] Two or more independent implementations
+* [ ] Demonstrated interoperability
+* [ ] Adoption in production systems
+* [ ] No IPR (intellectual property) encumbrances
+
+== Governance Model
+
+=== During Development (Current)
+
+* **Maintainer:** Jonathan D.A. Jewell
+* **Contributions:** Via GitHub Pull Requests
+* **Decisions:** Maintainer discretion with community input
+
+=== Post-RFC Publication
+
+* **Change Control:** IETF (for RFC-track changes)
+* **Community Input:** Via errata, new I-Ds
+* **Versioning:** Semantic versioning for format; RFC numbers for spec
+
+== Related Standards Coordination
+
+=== STATE.scm
+
+Sibling format for AI conversation state persistence.
+
+* Coordinate media type family
+* Share parser infrastructure
+* Align versioning strategy
+
+=== Potential Liaisons
+
+* **schema.org:** Structured data alignment
+* **SPDX:** License expression compatibility
+* **OpenAPI:** API ecosystem description
+
+== Risk Assessment
+
+[cols="2,2,3"]
+|===
+| Risk | Likelihood | Mitigation
+
+| Lack of adoption
+| Medium
+| Build tooling, demonstrate value
+
+| IETF process delays
+| Medium
+| Operate as de facto standard initially
+
+| Competing formats
+| Low
+| Differentiate clearly, focus on niche
+
+| IPR claims
+| Very Low
+| MIT licence, contributor agreement
+
+| Format design flaws
+| Low
+| Community review, iterate before standardising
+|===
+
+== Timeline Summary
+
+[source]
+----
+2025 Q4: Phase 1 Complete (Foundation)     ✓ CURRENT
+2026 Q1: Phase 2 (Community Review)
+2026 Q2: Phase 3 (Implementation)
+2026 Q2: Phase 4 (IETF Submission)
+2026 Q3: Phase 5 (IANA Registration)
+2026 Q4: Phase 6 (RFC Publication Target)
+----
+
+== Appendix: IETF Process Reference
+
+=== Useful Links
+
+* https://www.ietf.org/standards/process/[IETF Standards Process]
+* https://www.rfc-editor.org/rfc/rfc7322[RFC Style Guide]
+* https://authors.ietf.org/[I-D Author Resources]
+* https://datatracker.ietf.org/submit/[I-D Submission Tool]
+
+=== Document Status Progression
+
+[source]
+----
+Individual I-D → WG Adoption (optional) → IETF Last Call → IESG Review → RFC
+----
+
+=== Informational RFC Requirements
+
+1. Does not establish Internet standards
+2. Documents information of general interest
+3. Requires rough consensus
+4. No mandatory implementation
+
+== Appendix: Alternative Paths
+
+If IETF is not pursued, alternatives in order of preference:
+
+1. **De facto standard** - Publish, build tooling, let adoption drive recognition
+2. **OASIS** - Submit as Technical Committee proposal
+3. **Community Group** - Form working group (e.g., under Rust Foundation, CNCF)
+
+== Contact
+
+For questions about standardisation:
+
+* GitHub: https://github.com/hyperpolymath/ECOSYSTEM.scm
+* Issues: https://github.com/hyperpolymath/ECOSYSTEM.scm/issues
