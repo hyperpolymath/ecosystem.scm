@@ -1,6 +1,9 @@
 = ECOSYSTEM.scm
+image:https://img.shields.io/badge/license-PMPL--1.0-blue.svg[License,link="https://github.com/hyperpolymath/palimpsest-license"]
 
-image:https://img.shields.io/badge/license-AGPL--3.0-blue.svg[AGPL-3.0,link="https://www.gnu.org/licenses/agpl-3.0"] image:https://img.shields.io/badge/philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
+
+
+
 :author: Jonathan D.A. Jewell
 :revdate: 2025-12-15
 :toc:
@@ -120,7 +123,7 @@ Place in your repository root:
 
 [source,scheme]
 ----
-;; SPDX-License-Identifier: MIT
+;; SPDX-License-Identifier: PMPL-1.0
 ;; ECOSYSTEM.scm - Project ecosystem context
 
 (ecosystem
@@ -354,7 +357,7 @@ ECOSYSTEM.scm/
 ├── CONTRIBUTING.md
 ├── CODE_OF_CONDUCT.md
 ├── SECURITY.md
-└── LICENSE                    # MIT
+└── LICENSE                    # PMPL-1.0
 ----
 
 == Related Projects
@@ -387,7 +390,7 @@ See link:CONTRIBUTING.md[CONTRIBUTING.md] for guidelines.
 
 == Licence
 
-MIT License - see link:LICENSE[LICENSE]
+Palimpsest-MPL License v1.0 (PMPL-1.0) - see link:LICENSE[LICENSE]
 
 == Contact
 
