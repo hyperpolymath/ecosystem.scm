@@ -1,5 +1,5 @@
 = ECOSYSTEM.scm
-image::https://img.shields.io/badge/license-PLMP--1.0--or--later-blue.svg[License,link="https://github.com/hyperpolymath/palimpsest-license"]
+image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
 
 
 
@@ -147,7 +147,7 @@ Place in your repository root:
 
 [source,scheme]
 ----
-;; SPDX-License-Identifier: PLMP-1.0-or-later
+;; SPDX-License-Identifier: PMPL-1.0-or-later
 ;; ECOSYSTEM.scm - Project ecosystem context
 
 (ecosystem
